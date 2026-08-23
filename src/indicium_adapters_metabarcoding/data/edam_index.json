@@ -1,0 +1,36 @@
+{
+ "index": {
+  "community analysis": "edam:topic_3697",
+  "dna metabarcoding": "edam:topic_4038",
+  "edna metabarcoding": "edam:topic_4038",
+  "environmental metabarcoding": "edam:topic_4038",
+  "environmental microbiology": "edam:topic_3697",
+  "erna metabarcoding": "edam:topic_4038",
+  "metabarcoding": "edam:topic_4038",
+  "microbial ecology": "edam:topic_3697",
+  "microbiome": "edam:topic_3697",
+  "molecular community analysis": "edam:topic_3697",
+  "phylogenetics": "edam:topic_3293",
+  "rna metabarcoding": "edam:topic_4038",
+  "taxonomy": "edam:topic_0637"
+ },
+ "subtopics": [
+  "microbial-ecology",
+  "phylogenetics",
+  "taxonomy"
+ ],
+ "techniques": [
+  "dna-metabarcoding",
+  "edna-metabarcoding",
+  "environmental-metabarcoding",
+  "erna-metabarcoding",
+  "rna-metabarcoding"
+ ],
+ "roots": [
+  "http://edamontology.org/topic_4038",
+  "http://edamontology.org/topic_0637",
+  "http://edamontology.org/topic_3293",
+  "http://edamontology.org/topic_3697"
+ ],
+ "source": "EDAM (edamontology.org/EDAM.csv); entries verified against EBI OLS4"
+}
