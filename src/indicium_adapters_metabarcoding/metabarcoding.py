@@ -35,14 +35,20 @@ class MetabarcodingAdapter:
     study assigns taxonomy, builds a phylogenetic tree and reports community
     composition. See ``data/build_edam_index.py`` for the full rationale.
 
-    Metabarcoding is itself a leaf topic in EDAM, so unlike the sibling genomics
-    and astronomy adapters, ``subdomains`` and ``techniques`` cannot both be read
-    off a subtree under the domain root -- there is no subtree. Instead
-    ``subdomains`` is read from the additional roots' own labels (what fields the
-    index actually reached), and ``techniques`` is read from the domain root's
-    own EDAM-recorded synonyms (the named variants of the practice: DNA, RNA,
-    environmental, eDNA and eRNA metabarcoding). Both are read from the generated
-    index; neither is hand-listed.
+    Metabarcoding is itself a leaf topic in EDAM, so there is no subtree under
+    the domain root to read a decomposition off. Reading around that gap put the
+    two lists the wrong way up: ``subdomains`` came from the additional roots'
+    labels, which are neighbouring SCIENCES (microbial ecology, phylogenetics,
+    taxonomy) rather than parts of this one, while the named variants of the
+    practice -- DNA, RNA, environmental, eDNA, eRNA metabarcoding -- sat under
+    ``techniques``, where they name no assay.
+
+    The 2026-08-25 cross-domain audit corrected the inversion: the variants are
+    the subdomains, and the techniques are the two amplicon assays this field
+    can claim alone. The 16S, ITS and 18S markers are deliberately absent --
+    metagenomics declared them too, and a term two sciences both utter cannot
+    say which of them a paper belongs to, so it is withheld from both. The
+    generated EDAM index is still shipped and still answers ``enrich_claim``.
 
     Every qualifier matches ``^[a-z][a-z0-9_]*$`` (snake_case), required because
     Perspicacite routes adapter qualifiers onto the open ``asb:domainQualifier``
@@ -96,15 +102,22 @@ class MetabarcodingAdapter:
 
     ontology_prefixes: dict[str, str] = dict(METABARCODING_PREFIXES)
 
-    @property
-    def subdomains(self) -> tuple[str, ...]:
-        """Fields EDAM connects to metabarcoding, read from the generated index."""
-        return _edam.subtopics()
+    # ---- vocabulary this field alone can claim -----------------------------
+    # Not read from the index; see the class docstring for the inversion it had.
 
-    @property
-    def techniques(self) -> tuple[str, ...]:
-        """Named metabarcoding variants, read from the domain root's EDAM synonyms."""
-        return _edam.techniques()
+    subdomains: tuple[str, ...] = (
+        "dna-metabarcoding",
+        "rna-metabarcoding",
+        "edna-metabarcoding",
+        "erna-metabarcoding",
+        "environmental-metabarcoding",
+        "diet-metabarcoding",
+    )
+
+    techniques: tuple[str, ...] = (
+        "coi-amplicon-sequencing",
+        "12s-rrna-amplicon-sequencing",
+    )
 
     # ---- protocol methods --------------------------------------------------
 
