@@ -119,7 +119,7 @@ above.
 ## Install
 
 ```bash
-uv pip install -e .
+uv pip install -e ".[dev]"
 ```
 
 The `indicium.adapters` entry point makes it discoverable via
@@ -138,3 +138,5 @@ EDAM release. Never runs at install or import time.
 ## Licence
 
 MIT.
+
+Cite this package with `CITATION.cff`.
